@@ -2,7 +2,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 5;
+use Test::More tests => 6;
 use Test::Fatal;
 use Class::Load qw( :all );
 use lib 't/lib';
@@ -30,6 +30,15 @@ isnt(
   undef,
   'Loading a broken class breaks'
 );
+
+isnt(
+  exception {
+      load_optional_class('Class::Load::SyntaxError');
+  },
+  undef,
+  'Loading a broken class breaks(x2)'
+);
+
 
 is( load_optional_class('Class::Load::OK'), 1 , 'Existing Class => 1');
 is( load_optional_class('Class::Load::IDONOTEXIST'), 0, 'Missing Class => 0');
