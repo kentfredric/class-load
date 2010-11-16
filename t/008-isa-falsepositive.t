@@ -9,7 +9,7 @@ use lib 't/lib';
 
 isnt(
   exception {
-    load_optional_class('Class::Load::Error::DieIsa');
+    load_optional_class('Class::Load::Error::DieIsaSyntax');
   },
   undef,
   'Loading a broken class breaks'
@@ -17,7 +17,7 @@ isnt(
 
 isnt(
   exception {
-    load_optional_class('Class::Load::Error::DieIsa');
+    load_optional_class('Class::Load::Error::DieIsaSyntax');
   },
   undef,
   'Loading a broken class breaks(x2)'
