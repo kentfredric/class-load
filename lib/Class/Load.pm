@@ -152,19 +152,6 @@ sub try_load_class {
         };
     }
 
-    my $file = module_notional_filename($class);
-    # This says "our diagnostics of the package
-    # say perl's INC status about the file being loaded are
-    # wrong", so we delete it from %INC, so when we call require(),
-    # perl will *actually* try reloading the file.
-    #
-    # If the file is already in %INC, it won't retry,
-    # And on 5.8, it won't fail either!
-    #
-    # The extra benefit of this trick, is it helps even on
-    # 5.10, as instead of dying with "Compilation failed",
-    # it will die with the actual error, and thats a win-win.
-    delete $INC{$file};
     return try {
         local $SIG{__DIE__} = 'DEFAULT';
         if ($options && defined $options->{-version}) {

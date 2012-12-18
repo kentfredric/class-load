@@ -19,10 +19,13 @@ use Test::Fatal;
 #
 like( exception {
     load_class('Class::Load::SyntaxError');
-}, qr/syntax error/ );
+}, qr/syntax error/ , 'First Pass' );
+
+my $re = qr/Attempt to reload/;
+$re = qr/syntax error/ if "$]" < 5.010000;
 
 like( exception {
     load_class('Class::Load::SyntaxError');
-}, qr/syntax error/ );
+}, $re, 'Second Pass' );
 
 done_testing;
